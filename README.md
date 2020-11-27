@@ -37,14 +37,19 @@ Execute o comando:
 
 ## Configuração do Vagrant para o projeto
 O Vagrant é uma ferramenta de virtualização e uma das configurações necessárias para execução do projeto é a liberação de uma porta
-na máquina hospedeira para a máquina convidada. 
+na máquina hospedeira para a máquina convidada.
+
+Além disso também é necessário a criação de uma chave privada para realizar a conexão ssh entre a máquina hospedeira e a máquina convidada.
 
 Para isso, siga os passos abaixo: 
-1. Entre na pasta `resources` e edite o arquivo chamado `Vagrantfile`
-2. Altere o conteúdo entre as cerquílhas # para definir a porta do MySQL    
+1. Crie uma chave do tipo RSA e copie a chave pública para o diretório `resources/vagrant/configs`
+2. Entre na pasta `resources` e edite o arquivo chamado `Vagrantfile`
+3. Altere o conteúdo entre as cerquílhas # para definir a porta do MySQL    
 `config.vm.network "forwarded_port", guest: #guest_port#, host: #host_port#`
-3. Altere o conteúdo entre as cerquílhas # para definir o ip da máquina convidada   
+4. Altere o conteúdo entre as cerquílhas # para definir o ip da máquina convidada   
 `config.vm.network "public_network", ip: "#guest_address#"`
+5. Altere o conteúdo entre as cerquílhas # para apontar para sua chave pública
+`config.vm.provision "shell", inline: "cat /configs/#public_key#.pub >> .ssh/authorized_keys"`
 
 Assim como a porta definida em #host_port# e #guest_port#, o endereço de ip definido em #guest_address# precisam estar disponíveis para uso, caso contrário erros ocorrerão.
 
