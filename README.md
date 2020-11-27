@@ -48,7 +48,7 @@ Para isso, siga os passos abaixo:
 `config.vm.network "forwarded_port", guest: #guest_port#, host: #host_port#`
 4. Altere o conteúdo entre as cerquílhas # para definir o ip da máquina convidada   
 `config.vm.network "public_network", ip: "#guest_address#"`
-5. Altere o conteúdo entre as cerquílhas # para apontar para sua chave pública
+5. Altere o conteúdo entre as cerquílhas # para apontar para sua chave pública  
 `config.vm.provision "shell", inline: "cat /configs/#public_key#.pub >> .ssh/authorized_keys"`
 
 Assim como a porta definida em #host_port# e #guest_port#, o endereço de ip definido em #guest_address# precisam estar disponíveis para uso, caso contrário erros ocorrerão.
